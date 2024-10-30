@@ -44,8 +44,6 @@
 
 │   │   └── dataTable.scss
 
-│   ├── footer
-
 │   │   ├── Footer.tsx
 
 │   │   └── footer.scss
