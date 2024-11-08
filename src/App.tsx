@@ -1,16 +1,22 @@
 import Login from './pages/login';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
+import Register from './pages/register';
+import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import SignIn from './pages/sign-in/SignIn';
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />}>
-          <Route index element={<Login />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <div className="container mt-3">
+        <BrowserRouter>
+            {/* <Header /> */}
+            <Routes>
+              <Route path="/" element={<SignIn />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+        </BrowserRouter>
+      </div>
+
+    </div>
   );
 }
 
