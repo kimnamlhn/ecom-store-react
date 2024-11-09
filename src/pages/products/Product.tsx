@@ -11,6 +11,7 @@ import Testimonials from '../../components/Testimonials';
 import FAQ from '../../components/FAQ';
 import Footer from '../../components/Footer';
 import AppTheme from '../shared-theme/AppTheme';
+import ProductCard from '../../components/ProductCard';
 
 export default function Product(props: { disableCustomTheme?: boolean }) {
   return (
@@ -18,9 +19,11 @@ export default function Product(props: { disableCustomTheme?: boolean }) {
       <CssBaseline enableColorScheme />
 
       <AppAppBar />
-      <Hero />
       <div>
-
+        <ProductCard/>
+        <ProductCard/>
+        <ProductCard/>
+        
         <Footer />
       </div>
     </AppTheme>
