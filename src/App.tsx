@@ -13,7 +13,6 @@ function App() {
       <div className="container mt-3">
         <UserProvider >
           <BrowserRouter>
-            {/* <Header /> */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<SignIn />} />
