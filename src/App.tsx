@@ -5,6 +5,8 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Product from './pages/products/Product';
 import ProfileCard from './components/ProfileCard';
 import { UserProvider } from './contexts/UserContext';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
   return (
     <div>
@@ -16,8 +18,9 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
+
               <Route path="/products" element={<Product />} />
-              <Route path="/profile" element={<ProfileCard />} />
+              <Route path="/profile" element={<ProtectedRoute><ProfileCard /></ProtectedRoute>} />
 
             </Routes>
           </BrowserRouter>
