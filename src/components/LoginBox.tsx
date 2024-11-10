@@ -96,12 +96,11 @@ const LoginBox: React.FC = () => {
         //redirect to home
         navigate("/");
       }
-      else
-      {
-        setErrorMessage("Invalid username and password, please try again")
+      else {
+        setErrorMessage("Invalid code, please try again")
       }
     } catch (error) {
-      setErrorMessage("Some thing went wrong")
+      setErrorMessage("Invalid code, please try again")
     }
   };
 
@@ -171,8 +170,8 @@ const LoginBox: React.FC = () => {
             onChange={(e) => setCode(e.target.value)}
             className="verification-input"
           />
-          <button className="verification-button"  onClick={verifyCode} >Verify</button>
-          
+          <button className="verification-button" onClick={verifyCode} >Verify</button>
+
           {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
       )
