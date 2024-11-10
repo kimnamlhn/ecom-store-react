@@ -51,9 +51,9 @@ label {
     display: block;
   }
   
-  form p.error {
-    margin: 0 0 10px 10px;
-    text-align: left;
-    font-size: 10px;
-    color: red;
+  .error-message {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
   }

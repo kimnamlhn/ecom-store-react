@@ -96,8 +96,12 @@ const LoginBox: React.FC = () => {
         //redirect to home
         navigate("/");
       }
+      else
+      {
+        setErrorMessage("Invalid username and password, please try again")
+      }
     } catch (error) {
-
+      setErrorMessage("Some thing went wrong")
     }
   };
 
