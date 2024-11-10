@@ -8,6 +8,7 @@ import Container from '@mui/material/Container';
 import Sitemark from './SitemarkIcon';
 import ColorModeIconDropdown from './ColorModeIconDropdown';
 import { Link } from 'react-router-dom';
+import { useUserContext } from '../contexts/UserContext';
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -31,6 +32,12 @@ export default function AppAppBar() {
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
+
+  const { user, logoutUser } = useUserContext();
+
+  const HandleLogout = () => {
+    logoutUser();
+  }
 
   return (
     <AppBar
@@ -64,16 +71,32 @@ export default function AppAppBar() {
               alignItems: 'center',
             }}
           >
-            <Link to="/login">
-              <Button color="primary" variant="text" size="small">
-                Sign in
-              </Button>
-            </Link>
-            <Link to="/register">
-              <Button color="primary" variant="contained" size="small">
-                Sign up
-              </Button>
-            </Link>
+
+            {user != null ?
+              <div>
+                <Link to="/profile">
+                  <Button color="primary" variant="text" size="small">
+                    View Profile
+                  </Button>
+                </Link>
+                  <Button color="primary" variant="contained" size="small" onClick={HandleLogout}>
+                    Logout
+                  </Button>
+              </div>
+              :
+              <div>
+                <Link to="/login">
+                  <Button color="primary" variant="text" size="small">
+                    Sign in
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button color="primary" variant="contained" size="small">
+                    Sign up
+                  </Button>
+                </Link>
+              </div>
+            }
             <ColorModeIconDropdown />
           </Box>
 
