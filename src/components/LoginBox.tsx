@@ -6,6 +6,7 @@ import { User } from '../models/User';
 import axios from 'axios';
 import { Link, Typography } from '@mui/material';
 import ForgotPassword from './ForgotPassword';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const LoginSchema = Yup.object().shape({
   userName: Yup.string()
@@ -20,11 +21,17 @@ const LoginSchema = Yup.object().shape({
 
 const LoginBox: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [loginStatus, setLoginStatus] = useLocalStorage('loginStatus', false);
+  const [token, setToken] = useLocalStorage('token', '');
+  const [user, setUser] = useLocalStorage('user', null);
+
   const navigate = useNavigate();
   const [isVerificationStep, setIsVerificationStep] = useState(false);
 
   const [tempUserData, setTempUserData] = useState<User | null>(null);
   const [open, setOpen] = React.useState(false);
+  const [code, setCode] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +40,7 @@ const LoginBox: React.FC = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleLogin = async (values: { userName: string; password: string }) => {
     try {
       const response = await axios.post('https://ccmernapp-11a99251a1a7.herokuapp.com/api/auth/login', values);
@@ -47,18 +55,45 @@ const LoginBox: React.FC = () => {
           token: ''
         };
 
+        setUserName(userName);
         setTempUserData(user);
-        setErrorMessage(null);
         setIsVerificationStep(true);
       } else {
         setErrorMessage(response.data.message || 'Unexpected login issue');
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
-        setErrorMessage('Invalid username or password. Please try again.');
+        setErrorMessage('Invalid credentials. Please try again.');
       } else {
-        setErrorMessage('Login failed. Please try again later.');
+        setErrorMessage('Error, please try again later.');
       }
+    }
+  };
+
+  const verifyCode = async () => {
+    try {
+      const response = await axios.post('https://ccmernapp-11a99251a1a7.herokuapp.com/api/auth/verify', {
+        userName,
+        code,
+      });
+
+      if (response.status === 200) {
+        const token = response.data.data.token;
+        const user: User = {
+          userName: userName != null ? userName : "",
+          isAdmin: userName === "admin" ? true : false,
+          token: token
+        };
+
+        setLoginStatus(true);
+        setToken(token);
+        setToken(user);
+
+        //redirect to home
+        navigate("/");
+      }
+    } catch (error) {
+
     }
   };
 
@@ -104,6 +139,9 @@ const LoginBox: React.FC = () => {
             Sign up
           </Link>
         </Typography>
+
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
       </div>
 
     )
@@ -121,14 +159,17 @@ const LoginBox: React.FC = () => {
           <input
             type="text"
             placeholder="Enter verification code"
-            // value={code}
-            // onChange={(e) => setCode(e.target.value)}
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
             className="verification-input"
           />
-          <button className="verification-button">Verify</button>
-          {/* {message && <div className="verification-message">{message}</div>} */}
+          <button className="verification-button"  onClick={verifyCode} >Verify</button>
+          
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
         </div>
       )
+
+
   );
 };
 
