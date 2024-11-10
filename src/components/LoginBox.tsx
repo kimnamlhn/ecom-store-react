@@ -7,6 +7,8 @@ import axios from 'axios';
 import { Link, Typography } from '@mui/material';
 import ForgotPassword from './ForgotPassword';
 import useLocalStorage from '../hooks/useLocalStorage';
+import { useUserContext } from '../contexts/UserContext';
+import { Logout } from '@mui/icons-material';
 
 const LoginSchema = Yup.object().shape({
   userName: Yup.string()
@@ -25,6 +27,7 @@ const LoginBox: React.FC = () => {
   const [loginStatus, setLoginStatus] = useLocalStorage('loginStatus', false);
   const [token, setToken] = useLocalStorage('token', '');
   const [user, setUser] = useLocalStorage('user', null);
+  const { loginUser } = useUserContext();
 
   const navigate = useNavigate();
   const [isVerificationStep, setIsVerificationStep] = useState(false);
@@ -87,8 +90,9 @@ const LoginBox: React.FC = () => {
 
         setLoginStatus(true);
         setToken(token);
-        setToken(user);
+        // setUser(user);
 
+        loginUser(user);
         //redirect to home
         navigate("/");
       }

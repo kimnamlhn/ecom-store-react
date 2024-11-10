@@ -6,11 +6,13 @@ import SignUp from './pages/sign-up/SignUp';
 import Dashboard from './pages/dashboard/Dashboard';
 import Product from './pages/products/Product';
 import ProfileCard from './components/ProfileCard';
+import { UserProvider } from './contexts/UserContext';
 function App() {
   return (
     <div>
       <div className="container mt-3">
-        <BrowserRouter>
+        <UserProvider >
+          <BrowserRouter>
             {/* <Header /> */}
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -20,7 +22,9 @@ function App() {
               <Route path="/profile" element={<ProfileCard />} />
 
             </Routes>
-        </BrowserRouter>
+          </BrowserRouter>
+        </UserProvider>
+
       </div>
 
     </div>
