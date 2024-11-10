@@ -24,15 +24,10 @@ const LoginSchema = Yup.object().shape({
 const LoginBox: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
-  const [loginStatus, setLoginStatus] = useLocalStorage('loginStatus', false);
-  const [token, setToken] = useLocalStorage('token', '');
-  const [user, setUser] = useLocalStorage('user', null);
   const { loginUser } = useUserContext();
 
   const navigate = useNavigate();
   const [isVerificationStep, setIsVerificationStep] = useState(false);
-
-  const [tempUserData, setTempUserData] = useState<User | null>(null);
   const [open, setOpen] = React.useState(false);
   const [code, setCode] = useState('');
 
@@ -59,7 +54,6 @@ const LoginBox: React.FC = () => {
         };
 
         setUserName(userName);
-        setTempUserData(user);
         setIsVerificationStep(true);
       } else {
         setErrorMessage(response.data.message || 'Unexpected login issue');
@@ -88,11 +82,8 @@ const LoginBox: React.FC = () => {
           token: token
         };
 
-        setLoginStatus(true);
-        setToken(token);
-        // setUser(user);
-
         loginUser(user);
+
         //redirect to home
         navigate("/");
       }

@@ -6,6 +6,10 @@ import Avatar from "@mui/material/Avatar";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
+import { useUserContext } from "../contexts/UserContext";
+import { UserProfile } from "../models/UserProfile";
+import axios from "axios";
 
 // STYLES
 const styles = {
@@ -22,6 +26,41 @@ const styles = {
 
 //APP
 export default function ProfileCard(props: any) {
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const getUserProfile = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+      const response = await axios.get('https://ccmernapp-11a99251a1a7.herokuapp.com/api/user', {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const user = response.data.data;
+
+        const userProfile: UserProfile = {
+          userId: user.userId,
+          userName: user.userName,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        };
+
+        setUserProfile(userProfile);
+      }
+    } catch (error) {
+      setErrorMessage('Some thing went wrong, please try again.');
+    }
+  };
+  
+  useEffect(() => {
+    getUserProfile();
+  }, []);
+
   return (
     <Card variant="outlined">
       <Grid
@@ -64,29 +103,27 @@ export default function ProfileCard(props: any) {
         {/* DETAILS */}
         <Grid container>
           <Grid item xs={6}>
-            <Typography style={styles.details}>Detail 1</Typography>
-            <Typography style={styles.details}>Detail 2</Typography>
-            <Typography style={styles.details}>Detail 3</Typography>
+            <Typography style={styles.details}>User Id:</Typography>
+            <Typography style={styles.details}>User name:</Typography>
+            <Typography style={styles.details}>Email:</Typography>
+            <Typography style={styles.details}>First name:</Typography>
+            <Typography style={styles.details}>Last name:</Typography>
           </Grid>
+
           {/* VALUES */}
           <Grid item xs={6} sx={{ textAlign: "end" }}>
-            <Typography style={styles.value}>{props.dt1}</Typography>
-            <Typography style={styles.value}>{props.dt2}</Typography>
-            <Typography style={styles.value}>{props.dt3}</Typography>
+            <Typography style={styles.value}>{userProfile?.userId}</Typography>
+            <Typography style={styles.value}>{userProfile?.userName}</Typography>
+            <Typography style={styles.value}>{userProfile?.email}</Typography>
+            <Typography style={styles.value}>{userProfile?.firstName}</Typography>
+            <Typography style={styles.value}>{userProfile?.lastName}</Typography>
+
           </Grid>
         </Grid>
-
-        {/* BUTTON */}
-        <Grid item style={styles.details} sx={{ width: "100%" }}>
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{ width: "99%", p: 1, my: 2 }}
-          >
-            View Public Profile
-          </Button>
-        </Grid>
       </Grid>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </Card>
+
+
   );
 }

@@ -29,8 +29,6 @@ const RegisterSchema = Yup.object().shape({
 const RegisterBox: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
-    const [loginStatus, setLoginStatus] = useLocalStorage('loginStatus', false);
-    const [token, setToken] = useLocalStorage('token', '');
     const { loginUser } = useUserContext();
 
     const navigate = useNavigate();
@@ -71,8 +69,6 @@ const RegisterBox: React.FC = () => {
                     token: token
                 };
 
-                setLoginStatus(true);
-                setToken(token);
                 // setUser(user);
 
                 loginUser(user);

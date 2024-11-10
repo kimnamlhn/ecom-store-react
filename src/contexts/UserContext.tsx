@@ -33,7 +33,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const logoutUser = () => {
     setUser(null);
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
   };
 
   return (
