@@ -1,11 +1,11 @@
-import Login from './pages/login';
+import Login from './components/LoginBox';
 import Register from './pages/register';
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 import SignIn from './pages/sign-in/SignIn';
 import SignUp from './pages/sign-up/SignUp';
 import Dashboard from './pages/dashboard/Dashboard';
 import Product from './pages/products/Product';
-import ProfileCard from './pages/Profile/Profile';
+import ProfileCard from './components/ProfileCard';
 function App() {
   return (
     <div>
