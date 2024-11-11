@@ -77,7 +77,7 @@ export default function Order(props: { disableCustomTheme?: boolean }) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small"> Status: {order.status}$</Button>
+                <Button size="small"> Status: {order.status}</Button>
               </CardActions>
             </Card>
             
