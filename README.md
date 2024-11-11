@@ -12,6 +12,14 @@ An e-commerce website used for ordering products.
 - Auth routed: The only authenticated user can see their profile
 - Dark and Light theme.
 
+## Accounts
+- Admin account
+   - Username: admin
+   - Password: Qq@123456!
+- Normal account
+   - Username: namlehoai
+   - Password: Qq@123456!
+
 ## Installation
 
 ### Prerequisites
