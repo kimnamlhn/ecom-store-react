@@ -7,6 +7,7 @@ import './Product.css'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { ProductDetail } from '../../models/ProductDetail';
+import { Link } from 'react-router-dom';
 
 export default function Product(props: { disableCustomTheme?: boolean }) {
   const [products, setProducts] = useState<ProductDetail[]>([]);
@@ -36,6 +37,33 @@ export default function Product(props: { disableCustomTheme?: boolean }) {
     }
   };
 
+  const HandleOrder = async (productId: string, quantity: number) => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+      const response = await axios.post('https://ccmernapp-11a99251a1a7.herokuapp.com/api/shop/order/create',
+        { 
+          productId,
+          quantity
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      if (response.data.status === 200) {
+        alert("Your product have successfully ordered !")
+      }
+      else {
+        setErrorMessage('Some thing went wrong, please try again');
+      }
+    } catch (error) {
+      setErrorMessage('Some thing went wrong, please try again');
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
@@ -47,6 +75,15 @@ export default function Product(props: { disableCustomTheme?: boolean }) {
       <AppAppBar />
 
       <div className='product-container'>
+        <div className='order-page-url'>
+          View your order:
+          <Link to="/orders">
+            <Button color="primary" variant="text" size="small" className='order-page-btn'>
+              View
+            </Button>
+          </Link>
+        </div>
+
         <Box
           sx={{
             my: 4,
@@ -75,7 +112,7 @@ export default function Product(props: { disableCustomTheme?: boolean }) {
               </CardContent>
               <CardActions>
                 <Button size="small" className='product-price-btn'>{product.sale_price}$</Button>
-                <Button size="small" className='order-product-btn'> Order</Button>
+                <Button size="small" className='order-product-btn' onClick={() => HandleOrder(product.id, 1)}> Order</Button>
               </CardActions>
             </Card>
             

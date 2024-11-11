@@ -6,6 +6,7 @@ import Product from './pages/products/Product';
 import ProfileCard from './components/ProfileCard';
 import { UserProvider } from './contexts/UserContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Order from './pages/Order/Order';
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-
               <Route path="/products" element={<Product />} />
-              <Route path="/profile" element={<ProtectedRoute><ProfileCard /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProfileCard />} />
+              <Route path="/orders" element={<ProtectedRoute><Order /></ProtectedRoute>} />
 
             </Routes>
           </BrowserRouter>

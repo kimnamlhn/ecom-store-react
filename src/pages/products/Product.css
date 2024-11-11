@@ -17,3 +17,14 @@
     margin-top: 15px !important;
     font-size: 20px !important;
 }
+
+.order-page-url{
+    margin-left: 50px !important;
+    font-size: 20px;
+}
+
+.order-page-btn{
+    background-color: rgb(99, 55, 55) !important;
+    color:white !important;
+    margin-left: 10px  !important;
+}
