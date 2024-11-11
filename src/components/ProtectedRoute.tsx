@@ -16,6 +16,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, isAdminRightN
       setRedirectTo('/login');
     }
      else if (isAdminRightNeeded && !user.isAdmin) {
+      alert("You need admin rights to view this page");
       setRedirectTo('/');
     }
   }, [user, isAdminRightNeeded]);

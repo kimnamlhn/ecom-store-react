@@ -21,8 +21,8 @@ function App() {
 
               <Route path="/products" element={<ProtectedRoute><Product /></ProtectedRoute>} />
               <Route path="/profile" element={<ProtectedRoute><ProfileCard /></ProtectedRoute>} />
-              <Route path="/orders" element={<ProtectedRoute><Order /></ProtectedRoute>} />
-              
+              <Route path="/orders" element={<ProtectedRoute isAdminRightNeeded={true}><Order /></ProtectedRoute>} />
+
             </Routes>
           </BrowserRouter>
         </UserProvider>
