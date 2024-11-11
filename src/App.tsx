@@ -18,10 +18,11 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/login" element={<SignIn />} />
               <Route path="/register" element={<SignUp />} />
-              <Route path="/products" element={<Product />} />
-              <Route path="/profile" element={<ProfileCard />} />
-              <Route path="/orders" element={<ProtectedRoute><Order /></ProtectedRoute>} />
 
+              <Route path="/products" element={<ProtectedRoute><Product /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfileCard /></ProtectedRoute>} />
+              <Route path="/orders" element={<ProtectedRoute><Order /></ProtectedRoute>} />
+              
             </Routes>
           </BrowserRouter>
         </UserProvider>
