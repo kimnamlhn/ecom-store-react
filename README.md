@@ -14,7 +14,7 @@ An e-commerce website used for ordering products.
 
 ## Accounts
 - Admin account
-   - Username: admin
+   - Username: admin_account
    - Password: Qq@123456!
 - Normal account
    - Username: namlehoai

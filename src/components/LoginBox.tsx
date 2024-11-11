@@ -78,7 +78,7 @@ const LoginBox: React.FC = () => {
         const token = response.data.data.token;
         const user: User = {
           userName: userName != null ? userName : "",
-          isAdmin: userName === "admin" ? true : false,
+          isAdmin: userName === "admin_account" ? true : false,
           token: token
         };
 
