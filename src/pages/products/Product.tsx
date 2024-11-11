@@ -74,8 +74,8 @@ export default function Product(props: { disableCustomTheme?: boolean }) {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">{product.sale_price}$</Button>
-                <Button size="small"> sold: {product.sold}</Button>
+                <Button size="small" className='product-price-btn'>{product.sale_price}$</Button>
+                <Button size="small" className='order-product-btn'> Order</Button>
               </CardActions>
             </Card>
             
