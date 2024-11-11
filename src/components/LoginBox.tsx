@@ -45,7 +45,7 @@ const LoginBox: React.FC = () => {
 
       if (response.data.status === 200) {
         const { userName } = values;
-        const isAdmin = userName === 'admin';
+        const isAdmin = userName === 'admin_account';
 
         const user: User = {
           userName: userName,
