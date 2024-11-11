@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { User, UserRegisterInfo } from '../models/User';
 import axios from 'axios';
 import { Typography } from '@mui/material';
-import useLocalStorage from '../hooks/useLocalStorage';
 import { useUserContext } from '../contexts/UserContext';
 
 const RegisterSchema = Yup.object().shape({
@@ -68,8 +67,6 @@ const RegisterBox: React.FC = () => {
                     isAdmin: userName === "admin_account" ? true : false,
                     token: token
                 };
-
-                // setUser(user);
 
                 loginUser(user);
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
@@ -7,7 +6,7 @@ import { SitemarkIcon } from '../../components/CustomIcons';
 import AppTheme from '../../components/AppTheme';
 import ColorModeSelect from '../../components/ColorModeSelect';
 import LoginBox from '../../components/LoginBox';
-import './SignIn.css'
+import './SignIn.css';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',

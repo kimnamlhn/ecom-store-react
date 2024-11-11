@@ -6,9 +6,7 @@ import { User } from '../models/User';
 import axios from 'axios';
 import { Link, Typography } from '@mui/material';
 import ForgotPassword from './ForgotPassword';
-import useLocalStorage from '../hooks/useLocalStorage';
 import { useUserContext } from '../contexts/UserContext';
-import { Logout } from '@mui/icons-material';
 
 const LoginSchema = Yup.object().shape({
   userName: Yup.string()
@@ -45,13 +43,6 @@ const LoginBox: React.FC = () => {
 
       if (response.data.status === 200) {
         const { userName } = values;
-        const isAdmin = userName === 'admin_account';
-
-        const user: User = {
-          userName: userName,
-          isAdmin: isAdmin,
-          token: ''
-        };
 
         setUserName(userName);
         setIsVerificationStep(true);
@@ -59,11 +50,7 @@ const LoginBox: React.FC = () => {
         setErrorMessage(response.data.message || 'Unexpected login issue');
       }
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        setErrorMessage('Invalid credentials. Please try again.');
-      } else {
-        setErrorMessage('Error, please try again later.');
-      }
+      setErrorMessage('Invalid credentials. Please try again.');
     }
   };
 
