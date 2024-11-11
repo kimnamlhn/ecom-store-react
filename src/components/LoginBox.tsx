@@ -12,11 +12,11 @@ import { Logout } from '@mui/icons-material';
 
 const LoginSchema = Yup.object().shape({
   userName: Yup.string()
-    .min(8, "Too Short!")
+    .min(5, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
   password: Yup.string()
-    .min(8, "Too Short!")
+    .min(5, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
 });
